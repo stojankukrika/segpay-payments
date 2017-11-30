@@ -1,2 +1,0 @@
-generateSignUpPaymentPage($price_point_id, $buyer_email, $merchant_partner_username,$currency = 'USD', $buyer_username=null, $ref_1=null, $ref_2=null, $ref_3 = null)
-generateCancelSubscription($purchase_id,$cancel_reason = null)
