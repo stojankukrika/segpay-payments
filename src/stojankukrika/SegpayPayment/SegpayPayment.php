@@ -81,9 +81,9 @@ class SegpayPayment
      * Subscription link
      * @param $price_point_id
      * @param $buyer_email
+     * @param $buyer_username
      * @param $merchant_partner_username
      * @param string $currency
-     * @param null $buyer_username
      * @param null $x_auth_link
      * @param null $x_auth_text
      * @param null $x_decl_link
@@ -93,8 +93,8 @@ class SegpayPayment
      * @param null $ref_3
      * @return string
      */
-    public function generateSignUpPayment($price_point_id, $buyer_email, $merchant_partner_username,
-        $currency = 'USD', $buyer_username=null,$x_auth_link=null, $x_auth_text=null,$x_decl_link=null,$x_decl_text=null,
+    public function generateSignUpPayment($price_point_id, $buyer_email, $buyer_username, $merchant_partner_username,
+        $currency = 'USD', $x_auth_link=null, $x_auth_text=null,$x_decl_link=null,$x_decl_text=null,
         $ref_1=null, $ref_2=null, $ref_3 = null)
     {
         $return_url = $this->billingURL;
