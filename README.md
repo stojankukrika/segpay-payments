@@ -53,7 +53,7 @@ $response = $segpay->generateSignupPaymentPage($param1, $param2....);
 you need to redirect user to response page, and when customer pay, you will get payment notification (segpay send it to your payment page - define it in responses in Merchant panel).
 
 Here is list fo methods:
-[Segpay apiFunctionList](APIFunctionList).
+[Segpay apiFunctionList](APIFunctionList.md).
 
 
 Changelog
