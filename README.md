@@ -18,14 +18,7 @@ If you are using Laravel in a version < 5.5, the service provider must be regist
    stojankukrika\SegpayPayment\SegpayPaymentServiceProvider
 ];
 ```
-and add in aliases
-```php
-// config/app.php
-'aliases' => [
-    ...
-   'Segpay' => \stojankukrika\SegpayPayment\Facades\SegpayPayment::class
-];
-```
+
 After that run migration to make payment table to log payments
 
 ```bash

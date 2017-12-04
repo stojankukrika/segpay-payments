@@ -33,26 +33,6 @@ class SegpayPayment
     private $url_id = null;
 
     /**
-     * @var string
-     */
-    private $x_auth_link = null;
-
-    /**
-     * @var string
-     */
-    private $x_auth_text = null;
-
-    /**
-     * @var string
-     */
-    private $x_decl_link = null;
-
-    /**
-     * @var string
-     */
-    private $x_decl_text = null;
-
-    /**
      * Segpay billing URL
      *
      * @var string
@@ -88,10 +68,6 @@ class SegpayPayment
         $this->user_id = config('segpay.segpay_user_id');
         $this->user_access_key = config('segpay.segpay_user_access_key');
         $this->url_id = config('segpay.segpay_url_id');
-        $this->x_auth_link = config('segpay.segpay_x_auth_link');
-        $this->x_auth_text = config('segpay.segpay_x_auth_text');
-        $this->x_decl_link = config('segpay.segpay_x_decl_link');
-        $this->x_decl_text = config('segpay.segpay_x_decl_text');
     }
 
     /***********************************************************
@@ -108,13 +84,18 @@ class SegpayPayment
      * @param $merchant_partner_username
      * @param string $currency
      * @param null $buyer_username
+     * @param null $x_auth_link
+     * @param null $x_auth_text
+     * @param null $x_decl_link
+     * @param null $x_decl_text
      * @param null $ref_1
      * @param null $ref_2
      * @param null $ref_3
      * @return string
      */
     public function generateSignUpPayment($price_point_id, $buyer_email, $merchant_partner_username,
-        $currency = 'USD', $buyer_username=null, $ref_1=null, $ref_2=null, $ref_3 = null)
+        $currency = 'USD', $buyer_username=null,$x_auth_link=null, $x_auth_text=null,$x_decl_link=null,$x_decl_text=null,
+        $ref_1=null, $ref_2=null, $ref_3 = null)
     {
         $return_url = $this->billingURL;
         $return_url .= sprintf("x-eticketid=%s:%s", urlencode($this->package), urlencode($price_point_id));
@@ -126,10 +107,18 @@ class SegpayPayment
         $return_url .= sprintf("&REF1=%s", urlencode($ref_1));
         $return_url .= sprintf("&REF2=%s", urlencode($ref_2));
         $return_url .= sprintf("&REF3=%s", urlencode($ref_3));
-        $return_url .= sprintf("&x-auth-link=%s", urlencode($this->x_auth_link));
-        $return_url .= sprintf("&x-decl-text=%s", urlencode($this->x_auth_text));
-        $return_url .= sprintf("&x-auth-link=%s", urlencode($this->x_decl_link));
-        $return_url .= sprintf("&x-auth-text=%s", urlencode($this->x_decl_text));
+        if(!is_null($x_auth_link)) {
+            $return_url .= sprintf("&x-auth-link=%s", urlencode($x_auth_link));
+        }
+        if(!is_null($x_auth_text)) {
+            $return_url .= sprintf("&x-auth-text=%s", urlencode($x_auth_text));
+        }
+        if(!is_null($x_decl_link)) {
+            $return_url .= sprintf("&x-decl-link=%s", urlencode($x_decl_link));
+        }
+        if(!is_null($x_decl_text)) {
+            $return_url .= sprintf("&x-decl-text=%s", urlencode($x_decl_text));
+        }
 
         return $return_url;
     }
@@ -138,17 +127,29 @@ class SegpayPayment
      * One Click Pricing Link
      * @param $price_point_id
      * @param $oc_token
+     * @param null $x_auth_link
+     * @param null $x_auth_text
+     * @param null $x_decl_link
+     * @param null $x_decl_text
      * @return string
      */
-    public function generateOneClickPricing($price_point_id,$oc_token)
+    public function generateOneClickPricing($price_point_id,$oc_token,$x_auth_link=null, $x_auth_text=null,$x_decl_link=null,$x_decl_text=null)
     {
         $return_url = $this->oneClickURL;
         $return_url .= sprintf("x-eticketid=%s:%s", urlencode($this->package), urlencode($price_point_id));
         $return_url .= sprintf("&OCToken=%s", urlencode($oc_token));
-        $return_url .= sprintf("&x-auth-link=%s", urlencode($this->x_auth_link));
-        $return_url .= sprintf("&x-decl-text=%s", urlencode($this->x_auth_text));
-        $return_url .= sprintf("&x-auth-link=%s", urlencode($this->x_decl_link));
-        $return_url .= sprintf("&x-auth-text=%s", urlencode($this->x_decl_text));
+        if(!is_null($x_auth_link)) {
+            $return_url .= sprintf("&x-auth-link=%s", urlencode($x_auth_link));
+        }
+        if(!is_null($x_auth_text)) {
+            $return_url .= sprintf("&x-auth-text=%s", urlencode($x_auth_text));
+        }
+        if(!is_null($x_decl_link)) {
+            $return_url .= sprintf("&x-decl-link=%s", urlencode($x_decl_link));
+        }
+        if(!is_null($x_decl_text)) {
+            $return_url .= sprintf("&x-decl-text=%s", urlencode($x_decl_text));
+        }
 
         return $return_url;
     }
