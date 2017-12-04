@@ -33,10 +33,6 @@ Add in your .env file variables:
 - SEGPAY_USER_ID
 - SEGPAY_USER_ACCESS_KEY
 - SEGPAY_URL_ID
-- SEGPAY_X_AUTH_LINK
-- SEGPAY_X_AUTH_TEXT
-- SEGPAY_X_DECL_LINK
-- SEGPAY_X_DECL_TEXT
 ```
 set it values from mp.segpay.com and publish this provider using:
 ```bash
